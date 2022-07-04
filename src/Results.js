@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import SearchForm from "./SearchForm.js";
 import RepoCard from "./RepoCard.js";
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import CustomPagination from "./CustomPagination.js";
 
-const Results = (props) => {
-  const [query, setQuery] = useState(props.match.params.query);
-  const [results, setResults] = useState(null);
+const Results = ({ results, customQuery, updateResults }) => {
+  const [query, setQuery] = useState(customQuery);
+
   const [page, setPage] = useState(1);
 
   const getData = () => {
     fetch(`https://api.github.com/search/repositories?page=${page}&&q=${query}`)
       .then((results) => results.json())
       .then((data) => {
-        setResults(data);
+        updateResults(data);
       });
   };
 
@@ -22,8 +22,8 @@ const Results = (props) => {
   }, [page, query]);
 
   useEffect(() => {
-    setQuery(props.match.params.query);
-  }, [props.match.params.query]);
+    setQuery(customQuery);
+  }, [customQuery]);
 
   const updatePageNum = (newPageNum) => {
     setPage(newPageNum);
