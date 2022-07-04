@@ -1,25 +1,30 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+  display: flex;
+  align-items: center;
+  color: #000;
+`;
+
+const StyledImage = styled(Card.Img)`
+  width: 65px;
+  height: 65px;
+  margin-right: 10px;
+  border-radius: 100%;
+  margin-bottom: 15px;
+`;
 
 const RepoCard = ({ id, name, url }) => (
   <Link to={`/search/repo/${id}`}>
-    <Card style={{ display: "flex", alignItems: "center", color: "#000" }}>
-      <Card.Img
-        style={{
-          width: "65px",
-          borderRadius: "100%",
-          height: "65px",
-          marginRight: "10px",
-          marginBottom: "10px",
-        }}
-        variant="top"
-        src={url}
-      />
+    <StyledCard>
+      <StyledImage variant="top" src={url} />
       <Card.Body>
         <Card.Title>Repository name: {name}</Card.Title>
       </Card.Body>
-    </Card>
+    </StyledCard>
   </Link>
 );
 

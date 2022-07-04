@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { Alert } from "react-bootstrap";
+import styled from "styled-components";
+
+const StyledAlert = styled.p`
+  color: red;
+`;
 
 const specialChar = ["/", "%"];
 const SearchForm = (props) => {
@@ -36,11 +41,7 @@ const SearchForm = (props) => {
           onChange={handleInput}
         />
         <br />
-        {error && (
-          <p style={{ color: "red" }} variant="danger">
-            {error}
-          </p>
-        )}
+        {error && <StyledAlert>{error}</StyledAlert>}
         <button type="submit" className="btn btn-default">
           Submit
         </button>
